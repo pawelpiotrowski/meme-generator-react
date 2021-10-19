@@ -1,4 +1,6 @@
-import '@testing-library/jest-dom'
-import { loadEnvConfig } from '@next/env'
+import { enableFetchMocks } from "jest-fetch-mock";
+enableFetchMocks();
+import "@testing-library/jest-dom";
+import { loadEnvConfig } from "@next/env";
 
-loadEnvConfig(__dirname, true, { info: () => null, error: console.error })
+loadEnvConfig(__dirname, true, { info: () => null, error: console.error });
