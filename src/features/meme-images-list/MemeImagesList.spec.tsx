@@ -1,5 +1,4 @@
 import { render, screen } from "@testing-library/react";
-import { resolve } from "path/posix";
 import { Provider } from "react-redux";
 import { makeStore } from "../../app/store";
 import MemeImagesList from "./MemeImagesList";
@@ -7,7 +6,7 @@ import MemeImagesList from "./MemeImagesList";
 const mockMemeImage = {
   id: "1",
   name: "test",
-  url: "test",
+  url: "https://i.imgflip.com/1g8my4.jpg",
   width: 10,
   height: 20,
   box_count: 1,
@@ -34,9 +33,9 @@ describe("<MemeImagesList />", () => {
   });
 
   describe("when images are loaded", () => {
-    it("should display loaded images length", async () => {
+    it("should display loaded images", async () => {
       const store = makeStore();
-      const mockMemes = [mockMemeImage, mockMemeImage];
+      const mockMemes = [mockMemeImage, { ...mockMemeImage, id: "2" }];
       fetchMock.mockResponseOnce(
         JSON.stringify({
           data: { memes: mockMemes },
@@ -53,8 +52,10 @@ describe("<MemeImagesList />", () => {
       return new Promise((res, rej) => {
         store.subscribe(() => {
           const el = screen.getByTestId("memes-list");
+          const elHasChildren = !!(el && el.children);
+          const elChildrenLength = elHasChildren ? el.children.length : 0;
 
-          if (el.innerHTML === "Meme Images List has 2 images") {
+          if (elChildrenLength === mockMemes.length) {
             res(true);
           }
           rej("Displayed images length is incorrect");

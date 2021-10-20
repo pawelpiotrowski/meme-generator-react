@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { loadMemeImages } from "./memeImagesSlice";
 import { RootState } from "app/rootReducer";
+import MemeImagesListItem from "./MemeImagesListItem";
 
 export default function MemeImagesList() {
   const dispatch = useDispatch();
@@ -27,7 +28,9 @@ export default function MemeImagesList() {
 
   return (
     <div data-testid="memes-list">
-      Meme Images List has {`${list.length}`} images
+      {list.map((image) => (
+        <MemeImagesListItem key={image.id} image={image} />
+      ))}
     </div>
   );
 }

@@ -7,6 +7,10 @@ export type MemeImage = {
   box_count: number;
 };
 
+export type MemeImagesListItemProps = {
+  image: MemeImage;
+};
+
 export type MemeImagesData = {
   data: {
     memes: MemeImage[];

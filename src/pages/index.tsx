@@ -10,7 +10,10 @@ const IndexPage: NextPage = () => {
         <title>Memes Generator with Redux Toolkit</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <MemeImagesList />
+      <div className={styles.main}>Main</div>
+      <div className={styles.sidebar}>
+        <MemeImagesList />
+      </div>
     </div>
   );
 };

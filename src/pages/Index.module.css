@@ -1,3 +1,28 @@
+.container,
+.main,
+.sidebar {
+  height: 100%;
+}
+
+.container,
+.main {
+  overflow: hidden;
+}
+
 .container {
-  text-align: center;
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.main {
+  width: 80%;
+}
+
+.sidebar {
+  height: calc(100% - 2px);
+  width: 20%;
+  margin-top: 1px;
+  overflow: auto;
+  outline: 1px solid red;
 }

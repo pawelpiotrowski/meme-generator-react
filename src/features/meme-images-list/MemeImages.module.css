@@ -1,0 +1,10 @@
+.item {
+  height: 200px;
+  width: 200px;
+  position: relative;
+  margin: 8px auto;
+}
+
+.item--selected {
+  outline: 1px solid blue;
+}
