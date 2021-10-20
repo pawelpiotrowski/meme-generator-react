@@ -17,7 +17,7 @@ describe("<Dashboard />", () => {
 
   describe("on did mount", () => {
     it("should render", () => {
-      expect(screen.getByText("Hello Dashboard")).toBeInTheDocument();
+      expect(screen.getByTestId("dashboard")).toBeInTheDocument();
     });
   });
 });
