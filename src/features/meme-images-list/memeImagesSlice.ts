@@ -2,30 +2,64 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { AppThunk, AppDispatch } from "app/store";
 import { MemeImage, MemeImagesData } from "./interface";
 
-const initialState: MemeImage[] = [];
+type MemeImageSelected = MemeImage | null;
+
+const initialState = {
+  list: [] as MemeImage[],
+  hasError: false,
+  isLoading: false,
+  selected: null as MemeImageSelected,
+};
 
 const memeImagesSlice = createSlice({
   name: "memeImages",
   initialState,
   reducers: {
-    load(state, action: PayloadAction<MemeImage[]>) {
-      console.log(action);
-      // concat arrays and filter out duplicates
-      // https://stackoverflow.com/questions/1584370/how-to-merge-two-arrays-in-javascript-and-de-duplicate-items
-      // state.concat(action.payload.filter((item) => state.indexOf(item) < 0));
-      // actually thanks to Immer integration
-      // we are safe to mutate state
-      state = action.payload;
-      return state;
+    loaded(state, action: PayloadAction<MemeImage[]>) {
+      return {
+        ...state,
+        hasError: false,
+        isLoading: false,
+        list: action.payload,
+      };
+    },
+    loadError(state) {
+      return {
+        ...state,
+        hasError: true,
+        isLoading: false,
+      };
+    },
+    load(state) {
+      return {
+        ...state,
+        hasError: false,
+        isLoading: true,
+      };
+    },
+    select(state, action: PayloadAction<MemeImageSelected>) {
+      return {
+        ...state,
+        selected: action.payload,
+      };
     },
   },
 });
 
+export const { select: selectMemeImage } = memeImagesSlice.actions;
+
 export const loadMemeImages = (): AppThunk => async (dispatch: AppDispatch) => {
+  dispatch(memeImagesSlice.actions.load());
+
   const response = await fetch("/api/meme-images");
   const result = (await response.json()) as MemeImagesData;
 
-  dispatch(memeImagesSlice.actions.load(result.data.memes));
+  if (result.error !== null) {
+    dispatch(memeImagesSlice.actions.loadError());
+    return;
+  }
+
+  dispatch(memeImagesSlice.actions.loaded(result.data.memes));
 };
 
 export default memeImagesSlice.reducer;

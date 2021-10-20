@@ -10,7 +10,24 @@ export default function MemeImagesList() {
     dispatch(loadMemeImages());
   }, [dispatch]);
 
-  const memeImages = useSelector((state: RootState) => state.memeImages);
+  const { list, hasError, isLoading } = useSelector(
+    (state: RootState) => state.memeImages
+  );
 
-  return <div>Meme Images List has {memeImages.length} images</div>;
+  if (isLoading) {
+    return <div>Loading meme images...</div>;
+  }
+  if (hasError) {
+    return (
+      <div data-testid="memes-list-error">
+        Uh oh an error occurred while fetching meme images...
+      </div>
+    );
+  }
+
+  return (
+    <div data-testid="memes-list">
+      Meme Images List has {`${list.length}`} images
+    </div>
+  );
 }
