@@ -1,6 +1,26 @@
+html {
+  --app-color-1: #fcfff5;
+  --app-color-2: #d1dbbd;
+  --app-color-3: #91aa9d;
+  --app-color-4: #3e606f;
+  --app-color-5: #193441;
+}
+
+@media (prefers-color-scheme: dark) {
+  html {
+    --app-color-5: #fcfff5;
+    --app-color-4: #d1dbbd;
+    --app-color-3: #91aa9d;
+    --app-color-2: #3e606f;
+    --app-color-1: #193441;
+  }
+}
+
 html,
 body,
 #__next {
+  background-color: var(--app-color-1);
+  color: var(--app-color-5);
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,

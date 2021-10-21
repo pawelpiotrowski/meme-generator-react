@@ -1,10 +1,22 @@
 .item {
+  cursor: pointer;
   height: 200px;
-  width: 200px;
   position: relative;
-  margin: 8px auto;
 }
 
-.item--selected {
-  outline: 1px solid blue;
+.item img {
+  transform: scale(0.9);
+}
+
+.item:hover {
+  background-color: var(--app-color-2);
+}
+
+.item--selected,
+.item--selected:hover {
+  background-color: var(--app-color-4);
+}
+
+.item--selected:hover {
+  cursor: auto;
 }

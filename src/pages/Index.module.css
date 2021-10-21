@@ -16,13 +16,12 @@
 }
 
 .main {
-  width: 80%;
+  width: 74%;
 }
 
 .sidebar {
-  height: calc(100% - 2px);
-  width: 20%;
-  margin-top: 1px;
+  border-left: 4px solid var(--app-color-4);
+  height: 100%;
+  width: calc(26% - 4px);
   overflow: auto;
-  outline: 1px solid red;
 }
