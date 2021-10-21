@@ -1,0 +1,33 @@
+.form-container {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.form-container__input {
+  padding: 0 16px;
+}
+
+.form-container__input input,
+.form-container__input label {
+  display: inline-block;
+  vertical-align: text-bottom;
+}
+
+.form-container__input label {
+  width: 2.6em;
+}
+
+.form-container__input input {
+  background-color: transparent;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid var(--app-color-4);
+  width: calc(96% - 2.6em);
+  color: var(--app-color-5);
+  font-size: 1em;
+  line-height: 1;
+}
