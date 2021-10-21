@@ -5,6 +5,7 @@ export type MemeImage = {
   width: number;
   height: number;
   box_count: number;
+  refId?: string;
 };
 
 export type MemeImagesListItemProps = {

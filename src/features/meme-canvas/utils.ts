@@ -1,8 +1,27 @@
-import { isEmpty } from "lodash";
-import { Canvas2DRef } from "./interface";
+import { isEmpty, isNil } from "lodash";
+import { Canvas2DRef, EmbeddedImageRect } from "./interface";
 
 export const isCanvasSet = (canvasRef: Canvas2DRef): boolean =>
   !isEmpty(canvasRef);
+
+export const isCanvasImageSet = (canvasRef: Canvas2DRef): boolean =>
+  !isNil(canvasRef.image);
+
+export function getEmbeddedImageRect(
+  image: HTMLImageElement,
+  canvasRef: Canvas2DRef
+): EmbeddedImageRect {
+  const { height: maxHeight, width: maxWidth } = canvasRef;
+  const { height, width } = image;
+  const isImageBigger = height > maxHeight || width > maxWidth;
+  const scale = Math.min(maxWidth / width, maxHeight / height);
+  const scaledHeight = isImageBigger ? height * scale : height;
+  const scaledWidth = isImageBigger ? width * scale : width;
+  const x = scaledWidth < maxWidth ? (maxWidth - scaledWidth) / 2 : 0;
+  const y = scaledHeight < maxHeight ? (maxHeight - scaledHeight) / 2 : 0;
+
+  return { x, y, width: scaledWidth, height: scaledHeight };
+}
 
 export function setCanvasDimensions(canvasRef: Canvas2DRef): void {
   canvasRef.width = canvasRef.parentElement.offsetWidth;

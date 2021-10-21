@@ -1,9 +1,11 @@
+import { MemeImage } from "features/meme-images-list/interface";
+
 type CanvasRef = {
   element: HTMLCanvasElement;
   parentElement: HTMLElement;
   width: number;
   height: number;
-  image?: ImageData;
+  image?: MemeImage;
 };
 
 export type Canvas2DRef = CanvasRef & {
@@ -12,4 +14,11 @@ export type Canvas2DRef = CanvasRef & {
 
 export type CanvasWebGLRef = CanvasRef & {
   context: WebGL2RenderingContext;
+};
+
+export type EmbeddedImageRect = {
+  x: number;
+  y: number;
+  width: number;
+  height: number;
 };
