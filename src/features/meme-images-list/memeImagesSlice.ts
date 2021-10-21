@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { AppThunk, AppDispatch } from "app/store";
+import { AppThunk, AppDispatch } from "../../app/store";
 import { MemeImage, MemeImagesData } from "./interface";
 
 type MemeImageSelected = MemeImage | null;
@@ -8,7 +8,6 @@ const initialState = {
   list: [] as MemeImage[],
   hasError: false,
   isLoading: false,
-  selected: null as MemeImageSelected,
 };
 
 const memeImagesSlice = createSlice({
@@ -37,16 +36,8 @@ const memeImagesSlice = createSlice({
         isLoading: true,
       };
     },
-    select(state, action: PayloadAction<MemeImageSelected>) {
-      return {
-        ...state,
-        selected: action.payload,
-      };
-    },
   },
 });
-
-export const { select: selectMemeImage } = memeImagesSlice.actions;
 
 export const loadMemeImages = (): AppThunk => async (dispatch: AppDispatch) => {
   dispatch(memeImagesSlice.actions.load());

@@ -1,22 +1,22 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Image from "next/image";
-import { selectMemeImage } from "./memeImagesSlice";
+import { selectMemeImage } from "../dashboard/dashboardSlice";
 import { MemeImagesListItemProps } from "./interface";
 import styles from "./MemeImages.module.css";
-import { RootState } from "app/rootReducer";
-import { uniqueId } from "lodash";
+import { RootState } from "../../app/rootReducer";
+import { getUniqueRefId } from "../../app/utils";
 
 export default function MemeImagesListItem(props: MemeImagesListItemProps) {
   const dispatch = useDispatch();
 
-  const { selected } = useSelector((state: RootState) => state.memeImages);
-
-  const isSelected = () => selected && selected.id === props.image.id;
-
-  const [refId] = useState(
-    "ref" + uniqueId(Math.random().toString(36).substr(2, 5))
+  const { image: selectedImage } = useSelector(
+    (state: RootState) => state.dashboard
   );
+
+  const isSelected = () => selectedImage && selectedImage.id === props.image.id;
+
+  const [refId] = useState(getUniqueRefId());
 
   const handleClick = () => {
     if (isSelected()) {

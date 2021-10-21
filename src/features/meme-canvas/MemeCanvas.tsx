@@ -10,7 +10,7 @@ import {
 import styles from "./MemeCanvas.module.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/rootReducer";
-import { MemeImage } from "features/meme-images-list/interface";
+import { MemeImage } from "../../features/meme-images-list/interface";
 import { get, isNil } from "lodash";
 
 export const CANVAS_ID = "meme-canvas";
@@ -19,7 +19,7 @@ export const CANVAS_PARENT_ID = `${CANVAS_ID}-parent`;
 let canvasRef = {} as Canvas2DRef;
 
 export default function MemeCanvas() {
-  const { selected } = useSelector((state: RootState) => state.memeImages);
+  const { image } = useSelector((state: RootState) => state.dashboard);
   const getRefId = (): string | undefined => get(canvasRef, "image.refId");
   const hasRefId = () => typeof getRefId() === "string";
 
@@ -71,7 +71,6 @@ export default function MemeCanvas() {
   function onResize(): void {
     setCanvasDimensions(canvasRef);
     renderSelected();
-    console.log(canvasRef);
   }
 
   function onDestroy(): void {
@@ -85,7 +84,7 @@ export default function MemeCanvas() {
 
   useEffect(() => {
     onInit();
-    onSelected(selected);
+    onSelected(image);
     return onDestroy;
   });
 

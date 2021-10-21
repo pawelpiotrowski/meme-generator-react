@@ -37,11 +37,11 @@ describe("<MemeImagesListItem />", () => {
       user.click(screen.getByTestId("memes-list-item"));
 
       const {
-        memeImages: { selected },
+        dashboard: { image },
       } = store.getState();
 
-      expect(selected.id).toEqual(mockMemeImage.id);
-      expect(selected.name).toEqual(mockMemeImage.name);
+      expect(image.id).toEqual(mockMemeImage.id);
+      expect(image.name).toEqual(mockMemeImage.name);
     });
   });
 });

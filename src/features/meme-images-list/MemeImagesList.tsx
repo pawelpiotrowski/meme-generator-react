@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { loadMemeImages } from "./memeImagesSlice";
-import { RootState } from "app/rootReducer";
+import { RootState } from "../../app/rootReducer";
 import MemeImagesListItem from "./MemeImagesListItem";
 
 export default function MemeImagesList() {
