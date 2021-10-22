@@ -2,10 +2,10 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { MemeImage } from "../meme-images-list/interface";
 
 type MemeImageSelected = MemeImage | null;
-type TextBoxes = [string, string, string];
+export type TextBoxes = [string, string, string, string];
 
 const initialState = {
-  textBoxes: ["", "", ""] as TextBoxes,
+  textBoxes: ["", "", "", ""] as TextBoxes,
   image: null as MemeImageSelected,
 };
 
@@ -21,12 +21,11 @@ const dashboardSlice = createSlice({
     },
     setTextBox(state, action: PayloadAction<{ text: string; index: number }>) {
       const { index, text } = action.payload;
-      return {
-        ...state,
-        textBoxes: state.textBoxes.map((t, i) =>
-          i === index ? text : t
-        ) as TextBoxes,
-      };
+
+      state.textBoxes = state.textBoxes.map((t, i) =>
+        i === index ? text : t
+      ) as TextBoxes;
+      return state;
     },
   },
 });

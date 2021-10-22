@@ -1,4 +1,4 @@
-import { MemeImage } from "features/meme-images-list/interface";
+import { MemeImage } from "../../features/meme-images-list/interface";
 
 type CanvasRef = {
   element: HTMLCanvasElement;

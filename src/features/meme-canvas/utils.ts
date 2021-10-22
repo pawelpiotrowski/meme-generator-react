@@ -23,18 +23,20 @@ export function getEmbeddedImageRect(
   return { x, y, width: scaledWidth, height: scaledHeight };
 }
 
-export function setCanvasDimensions(canvasRef: Canvas2DRef): void {
+export function setCanvasDimensions(canvasRef: Canvas2DRef): Canvas2DRef {
   canvasRef.width = canvasRef.parentElement.offsetWidth;
   canvasRef.height = canvasRef.parentElement.offsetHeight;
   canvasRef.element.width = canvasRef.width;
   canvasRef.element.height = canvasRef.height;
+
+  return canvasRef;
 }
 
 export function setCanvas2D(
   canvasRef: Canvas2DRef,
   canvasId: string,
   parentElementId: string
-): void {
+): Canvas2DRef {
   canvasRef.element = document.getElementById(canvasId) as HTMLCanvasElement;
   canvasRef.context = canvasRef.element.getContext(
     "2d"
@@ -42,4 +44,6 @@ export function setCanvas2D(
   canvasRef.parentElement = document.getElementById(
     parentElementId
   ) as HTMLElement;
+
+  return canvasRef;
 }
