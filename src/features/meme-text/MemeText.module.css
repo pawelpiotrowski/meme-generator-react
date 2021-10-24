@@ -11,6 +11,10 @@
   padding: 0 16px;
 }
 
+.form-container__input--hidden {
+  display: none;
+}
+
 .form-container__input input,
 .form-container__input label {
   display: inline-block;
