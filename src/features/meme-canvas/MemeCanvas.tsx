@@ -10,13 +10,13 @@ import {
 import styles from "./MemeCanvas.module.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/rootReducer";
-import { get, isNil } from "lodash";
+import { attempt, get, isNil, throttle } from "lodash";
 
 export const CANVAS_ID = "meme-canvas";
 export const CANVAS_PARENT_ID = `${CANVAS_ID}-parent`;
 
 export default function MemeCanvas() {
-  const { image: selectedImage, textBoxes } = useSelector(
+  const { image: selectedImage } = useSelector(
     (state: RootState) => state.dashboard
   );
   const [canvasObject, setCanvasObject] = useState({} as Canvas2DRef);
@@ -24,7 +24,7 @@ export default function MemeCanvas() {
   const getRefId = (): string | undefined => get(canvasObject, "image.refId");
   const hasRefId = () => typeof getRefId() === "string";
 
-  function clearCanvas(): void {
+  function clearCanvas() {
     canvasObject.context.clearRect(
       0,
       0,
@@ -33,7 +33,7 @@ export default function MemeCanvas() {
     );
   }
 
-  function renderSelectedImage(imageToRender: HTMLImageElement): void {
+  function renderSelectedImage(imageToRender: HTMLImageElement) {
     const { x, y, width, height } = getEmbeddedImageRect(
       imageToRender,
       canvasObject
@@ -42,7 +42,7 @@ export default function MemeCanvas() {
     canvasObject.context.drawImage(imageToRender, x, y, width, height);
   }
 
-  function loadSelectedImage(clbk: () => void): void {
+  function loadSelectedImage(clbk?: () => void) {
     if (!hasRefId()) {
       return;
     }
@@ -58,29 +58,15 @@ export default function MemeCanvas() {
 
     memeImage.onload = () => {
       renderSelectedImage(memeImage);
-      clbk();
+      attempt(clbk);
     };
 
     memeImage.src = src;
   }
 
-  function renderTextBoxes() {
-    if (textBoxes.every((tb) => tb.length === 0)) {
-      return;
-    }
-    console.log("WILL RENDER TEXT!!!!!", textBoxes);
-  }
-
-  function render(): void {
+  function render() {
     clearCanvas();
-    loadSelectedImage(renderTextBoxes);
-  }
-
-  function onTextBoxesUpdate(): void {
-    if (!isCanvasImageSet(canvasObject)) {
-      return;
-    }
-    render();
+    loadSelectedImage();
   }
 
   function isAlreadySelected(): boolean {
@@ -90,7 +76,7 @@ export default function MemeCanvas() {
     );
   }
 
-  function onSelectedImage(): void {
+  function onSelectedImage() {
     if (isNil(selectedImage) || isAlreadySelected()) {
       return;
     }
@@ -100,29 +86,28 @@ export default function MemeCanvas() {
     render();
   }
 
-  function onResize(): void {
+  function onResize() {
     setCanvasObject(setCanvasDimensions(canvasObject));
     render();
   }
 
-  function onDestroy(): void {
+  function onDestroy() {
     window.removeEventListener("resize", onResize);
   }
 
-  function setCanvas(): void {
+  function setCanvas() {
     if (isCanvasSet(canvasObject)) {
       return;
     }
     setCanvasObject(setCanvas2D(canvasObject, CANVAS_ID, CANVAS_PARENT_ID));
     setCanvasObject(setCanvasDimensions(canvasObject));
-    window.addEventListener("resize", onResize);
+    window.addEventListener("resize", throttle(onResize, 100));
   }
+
   // mount
   useEffect(setCanvas, []);
   // will update selectedImage
   useEffect(onSelectedImage, [selectedImage]);
-  // will update textBoxes
-  useEffect(onTextBoxesUpdate, [textBoxes]);
   // unmount
   useEffect(() => onDestroy, []);
 

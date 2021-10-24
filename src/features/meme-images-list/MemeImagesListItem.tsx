@@ -19,10 +19,7 @@ export default function MemeImagesListItem(props: MemeImagesListItemProps) {
   const [refId] = useState(getUniqueRefId());
 
   const handleClick = () => {
-    if (isSelected()) {
-      return;
-    }
-    dispatch(selectMemeImage({ ...props.image, refId }));
+    !isSelected() && dispatch(selectMemeImage({ ...props.image, refId }));
   };
 
   return (
