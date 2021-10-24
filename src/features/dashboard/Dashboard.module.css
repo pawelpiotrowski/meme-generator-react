@@ -11,6 +11,7 @@
   height: calc(64% - 4px);
   background-color: var(--app-color-2);
   border-bottom: 4px solid var(--app-color-4);
+  position: relative;
 }
 
 .dashboard__toolbox {

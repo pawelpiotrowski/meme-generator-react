@@ -1,7 +1,8 @@
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { makeStore } from "../../app/store";
-import MemeCanvas, { CANVAS_ID } from "./MemeCanvas";
+import MemeCanvas from "./MemeCanvas";
+import { CANVAS_ID } from "./constants";
 
 describe("<MemeCanvas />", () => {
   let store;

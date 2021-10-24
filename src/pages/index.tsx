@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import MemeImagesList from "../features/meme-images-list/MemeImagesList";
-import Dashboard from "features/dashboard/Dashboard";
+import Dashboard from "../features/dashboard/Dashboard";
 import styles from "./Index.module.css";
 
 const IndexPage: NextPage = () => {

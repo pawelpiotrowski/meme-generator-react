@@ -6,20 +6,20 @@ import {
   isCanvasSet,
   isCanvasImageSet,
   getEmbeddedImageRect,
+  useCanvasSize,
 } from "./utils";
 import styles from "./MemeCanvas.module.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/rootReducer";
-import { attempt, get, isNil, throttle } from "lodash";
-
-export const CANVAS_ID = "meme-canvas";
-export const CANVAS_PARENT_ID = `${CANVAS_ID}-parent`;
+import { attempt, get, isNil } from "lodash";
+import { CANVAS_ID, CANVAS_PARENT_ID } from "./constants";
 
 export default function MemeCanvas() {
   const { image: selectedImage } = useSelector(
     (state: RootState) => state.dashboard
   );
   const [canvasObject, setCanvasObject] = useState({} as Canvas2DRef);
+  const canvasSize = useCanvasSize();
 
   const getRefId = (): string | undefined => get(canvasObject, "image.refId");
   const hasRefId = () => typeof getRefId() === "string";
@@ -87,29 +87,24 @@ export default function MemeCanvas() {
   }
 
   function onResize() {
-    setCanvasObject(setCanvasDimensions(canvasObject));
+    setCanvasObject(setCanvasDimensions(canvasObject, canvasSize));
     render();
-  }
-
-  function onDestroy() {
-    window.removeEventListener("resize", onResize);
   }
 
   function setCanvas() {
     if (isCanvasSet(canvasObject)) {
       return;
     }
-    setCanvasObject(setCanvas2D(canvasObject, CANVAS_ID, CANVAS_PARENT_ID));
-    setCanvasObject(setCanvasDimensions(canvasObject));
-    window.addEventListener("resize", throttle(onResize, 100));
+    setCanvasObject(setCanvas2D(canvasObject, CANVAS_ID));
+    setCanvasObject(setCanvasDimensions(canvasObject, canvasSize));
   }
 
   // mount
   useEffect(setCanvas, []);
   // will update selectedImage
   useEffect(onSelectedImage, [selectedImage]);
-  // unmount
-  useEffect(() => onDestroy, []);
+  // will update canvasSize
+  useEffect(onResize, [canvasSize]);
 
   return (
     <div id={CANVAS_PARENT_ID} className={styles["canvas-container"]}>

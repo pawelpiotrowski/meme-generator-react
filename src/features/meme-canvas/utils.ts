@@ -1,5 +1,7 @@
-import { isEmpty, isNil } from "lodash";
-import { Canvas2DRef, EmbeddedImageRect } from "./interface";
+import { useLayoutEffect, useState } from "react";
+import { isEmpty, isNil, throttle } from "lodash";
+import { Canvas2DRef, CanvasRefSize, EmbeddedImageRect } from "./interface";
+import { CANVAS_PARENT_ID } from "./constants";
 
 export const isCanvasSet = (canvasRef: Canvas2DRef): boolean =>
   !isEmpty(canvasRef);
@@ -23,27 +25,49 @@ export function getEmbeddedImageRect(
   return { x, y, width: scaledWidth, height: scaledHeight };
 }
 
-export function setCanvasDimensions(canvasRef: Canvas2DRef): Canvas2DRef {
-  canvasRef.width = canvasRef.parentElement.offsetWidth;
-  canvasRef.height = canvasRef.parentElement.offsetHeight;
-  canvasRef.element.width = canvasRef.width;
-  canvasRef.element.height = canvasRef.height;
+export function setCanvasDimensions(
+  canvasRef: Canvas2DRef,
+  { width, height }: CanvasRefSize
+): Canvas2DRef {
+  canvasRef.width = width;
+  canvasRef.height = height;
+  canvasRef.element.width = width;
+  canvasRef.element.height = height;
 
   return canvasRef;
 }
 
 export function setCanvas2D(
   canvasRef: Canvas2DRef,
-  canvasId: string,
-  parentElementId: string
+  canvasId: string
 ): Canvas2DRef {
   canvasRef.element = document.getElementById(canvasId) as HTMLCanvasElement;
   canvasRef.context = canvasRef.element.getContext(
     "2d"
   ) as CanvasRenderingContext2D;
-  canvasRef.parentElement = document.getElementById(
-    parentElementId
-  ) as HTMLElement;
 
   return canvasRef;
+}
+
+export function useCanvasSize() {
+  const [size, setSize] = useState({ height: 0, width: 0 });
+  // i know this isn't great
+  // https://gist.github.com/gaearon/e7d97cdf38a2907924ea12e4ebdf3c85
+  if (typeof window !== "undefined") {
+    useLayoutEffect(() => {
+      const canvas = document.getElementById(CANVAS_PARENT_ID);
+
+      function updateSize() {
+        const { offsetHeight: height, offsetWidth: width } = canvas;
+
+        setSize({ height, width });
+      }
+      window.addEventListener("resize", updateSize);
+      updateSize();
+      return () =>
+        window.removeEventListener("resize", throttle(updateSize, 100));
+    }, []);
+  }
+
+  return size;
 }

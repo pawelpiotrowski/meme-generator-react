@@ -2,10 +2,12 @@ import { MemeImage } from "../../features/meme-images-list/interface";
 
 type CanvasRef = {
   element: HTMLCanvasElement;
-  parentElement: HTMLElement;
-  width: number;
-  height: number;
   image?: MemeImage;
+} & CanvasRefSize;
+
+export type CanvasRefSize = {
+  height: number;
+  width: number;
 };
 
 export type Canvas2DRef = CanvasRef & {
@@ -19,6 +21,4 @@ export type CanvasWebGLRef = CanvasRef & {
 export type EmbeddedImageRect = {
   x: number;
   y: number;
-  width: number;
-  height: number;
-};
+} & CanvasRefSize;
