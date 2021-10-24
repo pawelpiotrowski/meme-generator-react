@@ -12,6 +12,7 @@ const config: InitialOptionsTsJest = {
       tsconfig: "tsconfig.test.json",
     },
   },
+  coveragePathIgnorePatterns: [".+\\.(css)$"],
 };
 
 export default config;
