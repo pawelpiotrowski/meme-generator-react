@@ -1,6 +1,6 @@
 import styles from "./Dashboard.module.css";
 import MemeCanvas from "../../features/meme-canvas/MemeCanvas";
-import MemeText from "../../features/meme-text/MemeText";
+import MemeText from "../meme-text-input/MemeText";
 
 export default function Dashboard() {
   return (

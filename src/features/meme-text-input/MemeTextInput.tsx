@@ -1,4 +1,4 @@
-import { setTextBox } from "../../features/dashboard/dashboardSlice";
+import { setTextBox } from "../dashboard/dashboardSlice";
 import { ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 import styles from "./MemeText.module.css";
