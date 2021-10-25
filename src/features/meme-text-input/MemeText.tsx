@@ -11,7 +11,7 @@ export default function MemeText() {
   const { image: selectedImage, textBoxes } = useSelector(
     (state: RootState) => state.dashboard
   );
-  const boxCount = get(selectedImage, "box_count", textBoxes.length);
+  // const boxCount = get(selectedImage, "box_count", textBoxes.length);
 
   function handleSubmit(event: FormEvent): void {
     event.preventDefault();
@@ -21,15 +21,10 @@ export default function MemeText() {
     <form
       data-testid={dataTestId}
       onSubmit={handleSubmit}
-      className={styles["form-container"]}
+      className={styles.formContainer}
     >
       {textBoxes.map((text, index) => (
-        <MemeTextInput
-          key={index}
-          text={text}
-          index={index}
-          hidden={index > boxCount - 1}
-        />
+        <MemeTextInput key={index} text={text} index={index} />
       ))}
     </form>
   );

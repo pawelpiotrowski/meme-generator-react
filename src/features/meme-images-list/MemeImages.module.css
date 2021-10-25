@@ -12,11 +12,11 @@
   background-color: var(--app-color-2);
 }
 
-.item--selected,
-.item--selected:hover {
+.itemSelected,
+.itemSelected:hover {
   background-color: var(--app-color-4);
 }
 
-.item--selected:hover {
+.itemSelected:hover {
   cursor: auto;
 }

@@ -15,7 +15,7 @@ export default function MemeSvg() {
   );
 
   return (
-    <div id={SVG_PARENT_ID} className={styles["meme-svg__wrapper"]}>
+    <div id={SVG_PARENT_ID} className={styles.memeSvgWrapper}>
       <svg
         data-testid={SVG_ID}
         id={SVG_ID}

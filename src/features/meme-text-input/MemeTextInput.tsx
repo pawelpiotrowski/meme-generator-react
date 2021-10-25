@@ -5,26 +5,15 @@ import styles from "./MemeText.module.css";
 
 export const dataTestId = "meme-text-input";
 
-export default function MemeTextInput(props: {
-  text: string;
-  index: number;
-  hidden: boolean;
-}) {
+export default function MemeTextInput(props: { text: string; index: number }) {
   const dispatch = useDispatch();
 
   function handleChange(event: ChangeEvent<HTMLInputElement>): void {
     dispatch(setTextBox({ text: event.target.value, index: props.index }));
   }
 
-  function getCssClass(): string {
-    return (
-      styles["form-container__input"] +
-      (props.hidden ? ` ${styles["form-container__input--hidden"]}` : "")
-    );
-  }
-
   return (
-    <p data-testid={dataTestId} className={getCssClass()}>
+    <p data-testid={dataTestId} className={styles.formContainerInput}>
       <label>#{props.index + 1}</label>
       <input onChange={handleChange} />
     </p>

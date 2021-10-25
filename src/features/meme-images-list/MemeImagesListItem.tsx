@@ -25,7 +25,7 @@ export default function MemeImagesListItem(props: MemeImagesListItemProps) {
   return (
     <div
       data-testid="memes-list-item"
-      className={`${styles.item} ${isSelected() && styles["item--selected"]}`}
+      className={`${styles.item} ${isSelected() && styles.itemSelected}`}
       onClick={handleClick}
       id={refId}
     >

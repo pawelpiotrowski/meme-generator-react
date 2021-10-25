@@ -6,7 +6,7 @@
   flex-direction: column;
 }
 
-.dashboard__canvas-container {
+.dashboardCanvasContainer {
   width: 100%;
   height: calc(64% - 4px);
   background-color: var(--app-color-2);
@@ -14,7 +14,7 @@
   position: relative;
 }
 
-.dashboard__toolbox {
+.dashboardToolbox {
   width: 100%;
   height: 36%;
 }

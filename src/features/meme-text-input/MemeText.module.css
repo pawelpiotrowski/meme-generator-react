@@ -1,4 +1,4 @@
-.form-container {
+.formContainer {
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -7,25 +7,21 @@
   justify-content: space-evenly;
 }
 
-.form-container__input {
+.formContainerInput {
   padding: 0 16px;
 }
 
-.form-container__input--hidden {
-  display: none;
-}
-
-.form-container__input input,
-.form-container__input label {
+.formContainerInput input,
+.formContainerInput label {
   display: inline-block;
   vertical-align: text-bottom;
 }
 
-.form-container__input label {
+.formContainerInput label {
   width: 2.6em;
 }
 
-.form-container__input input {
+.formContainerInput input {
   background-color: transparent;
   outline: none;
   border: none;

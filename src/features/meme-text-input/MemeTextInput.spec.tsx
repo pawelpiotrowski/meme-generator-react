@@ -15,7 +15,7 @@ describe("<MemeTextInput />", () => {
     beforeEach(() => {
       render(
         <Provider store={store}>
-          <MemeTextInput text="test" index={0} hidden={false} />
+          <MemeTextInput text="test" index={0} />
         </Provider>
       );
     });
@@ -25,26 +25,11 @@ describe("<MemeTextInput />", () => {
     });
   });
 
-  describe("with property hidden", () => {
-    beforeEach(() => {
-      render(
-        <Provider store={store}>
-          <MemeTextInput text="test" index={0} hidden={true} />
-        </Provider>
-      );
-    });
-    it("should add class hidden to element", () => {
-      expect(screen.getByTestId(dataTestId)).toHaveClass(
-        "form-container__input--hidden"
-      );
-    });
-  });
-
   describe("on input change", () => {
     beforeEach(() => {
       render(
         <Provider store={store}>
-          <MemeTextInput text="test" index={0} hidden={false} />
+          <MemeTextInput text="test" index={0} />
         </Provider>
       );
     });

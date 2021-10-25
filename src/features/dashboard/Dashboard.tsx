@@ -6,11 +6,11 @@ import MemeSvg from "../meme-text-output/MemeSvg";
 export default function Dashboard() {
   return (
     <div data-testid="dashboard" className={styles.dashboard}>
-      <div className={styles["dashboard__canvas-container"]}>
+      <div className={styles.dashboardCanvasContainer}>
         <MemeSvg />
         <MemeCanvas />
       </div>
-      <div className={styles["dashboard__toolbox"]}>
+      <div className={styles.dashboardToolbox}>
         <MemeText />
       </div>
     </div>

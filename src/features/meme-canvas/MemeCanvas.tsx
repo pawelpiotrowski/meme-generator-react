@@ -113,14 +113,11 @@ export default function MemeCanvas() {
   useEffect(onResize, [canvasSize]);
 
   return (
-    <div id={CANVAS_PARENT_ID} className={styles["canvas-container"]}>
+    <div id={CANVAS_PARENT_ID} className={styles.canvasContainer}>
       <canvas data-testid={CANVAS_ID} id={CANVAS_ID}></canvas>
-      <canvas
-        className={styles["meme-canvas-export"]}
-        id={CANVAS_EXPORT_ID}
-      ></canvas>
-      <button className={styles["export-canvas-button"]} onClick={exportCanvas}>
-        EXPORT
+      <canvas className={styles.exportCanvas} id={CANVAS_EXPORT_ID}></canvas>
+      <button className={styles.exportCanvasButton} onClick={exportCanvas}>
+        DOWNLOAD
       </button>
     </div>
   );

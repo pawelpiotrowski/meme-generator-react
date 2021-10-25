@@ -1,18 +1,18 @@
-.canvas-container {
+.canvasContainer {
   border: 2px solid var(--app-color-5);
   height: calc(100% - 1px);
   width: calc(100% - 1px);
   overflow: hidden;
 }
 
-.export-canvas-button {
+.exportCanvasButton {
   position: absolute;
   bottom: 10px;
   right: 10px;
   display: block;
 }
 
-.meme-canvas-export {
+.exportCanvas {
   position: absolute;
   top: 0;
   left: 0;
