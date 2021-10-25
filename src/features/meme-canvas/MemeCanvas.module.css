@@ -4,3 +4,18 @@
   width: calc(100% - 1px);
   overflow: hidden;
 }
+
+.export-canvas-button {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  display: block;
+}
+
+.meme-canvas-export {
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  z-index: 0;
+}

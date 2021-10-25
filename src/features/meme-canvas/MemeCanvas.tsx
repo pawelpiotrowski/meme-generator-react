@@ -7,12 +7,14 @@ import {
   isCanvasImageSet,
   getEmbeddedImageRect,
   useCanvasSize,
+  exportCanvasToImage,
 } from "./utils";
 import styles from "./MemeCanvas.module.css";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/rootReducer";
 import { attempt, get, isNil } from "lodash";
-import { CANVAS_ID, CANVAS_PARENT_ID } from "./constants";
+import { CANVAS_EXPORT_ID, CANVAS_ID, CANVAS_PARENT_ID } from "./constants";
+import { SVG_PARENT_ID } from "../meme-text-output/MemeSvg";
 
 export default function MemeCanvas() {
   const { image: selectedImage } = useSelector(
@@ -23,6 +25,10 @@ export default function MemeCanvas() {
 
   const getRefId = (): string | undefined => get(canvasObject, "image.refId");
   const hasRefId = () => typeof getRefId() === "string";
+
+  function exportCanvas() {
+    exportCanvasToImage(canvasObject, SVG_PARENT_ID, CANVAS_EXPORT_ID);
+  }
 
   function clearCanvas() {
     canvasObject.context.clearRect(
@@ -109,6 +115,13 @@ export default function MemeCanvas() {
   return (
     <div id={CANVAS_PARENT_ID} className={styles["canvas-container"]}>
       <canvas data-testid={CANVAS_ID} id={CANVAS_ID}></canvas>
+      <canvas
+        className={styles["meme-canvas-export"]}
+        id={CANVAS_EXPORT_ID}
+      ></canvas>
+      <button className={styles["export-canvas-button"]} onClick={exportCanvas}>
+        EXPORT
+      </button>
     </div>
   );
 }

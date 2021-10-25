@@ -1,13 +1,20 @@
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/rootReducer";
 import { useCanvasSize } from "../meme-canvas/utils";
 import styles from "./MemeSvg.module.css";
+import { antonFont } from "./antonFontBase64";
 
-const SVG_ID = "meme-svg";
+export const SVG_ID = "meme-svg";
+export const SVG_PARENT_ID = "meme-svg-parent";
 
 export default function MemeSvg() {
   const { height, width } = useCanvasSize();
+  const { image, textBoxes } = useSelector(
+    (state: RootState) => state.dashboard
+  );
 
   return (
-    <div className={styles["meme-svg__wrapper"]}>
+    <div id={SVG_PARENT_ID} className={styles["meme-svg__wrapper"]}>
       <svg
         id={SVG_ID}
         height="100%"
@@ -15,9 +22,22 @@ export default function MemeSvg() {
         xmlns="http://www.w3.org/2000/svg"
         viewBox={`0 0 ${width} ${height}`}
       >
-        <text x="20" y="35">
-          Hello
-        </text>
+        <defs>
+          <defs>
+            <style>{`@font-face {font-family: Anton; src: url(${antonFont});} .anton {font-family: "Courier";}`}</style>
+          </defs>
+        </defs>
+        {textBoxes.map((box, index) => (
+          <text
+            key={index}
+            x="20"
+            y={60 * (index + 1)}
+            fontFamily="Anton"
+            fontSize={width / 16}
+          >
+            {box}
+          </text>
+        ))}
       </svg>
     </div>
   );

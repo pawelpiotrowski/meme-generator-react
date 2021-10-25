@@ -71,3 +71,38 @@ export function useCanvasSize() {
 
   return size;
 }
+
+export function exportCanvasToImage(
+  canvasRef: Canvas2DRef,
+  svgId: string,
+  canvasExportId: string
+) {
+  const sourceCanvas = canvasRef.element;
+  const destinationCanvas = document.getElementById(
+    canvasExportId
+  ) as HTMLCanvasElement;
+  const destinationContext = destinationCanvas.getContext("2d");
+
+  destinationCanvas.width = canvasRef.width;
+  destinationCanvas.height = canvasRef.height;
+  destinationContext.drawImage(sourceCanvas, 0, 0);
+
+  const svgString = document.getElementById(svgId).innerHTML;
+  const img = new Image();
+  const svg = new Blob([svgString], {
+    type: "image/svg+xml;charset=utf-8",
+  });
+  const url = URL.createObjectURL(svg);
+
+  img.onload = function () {
+    destinationContext.drawImage(img, 0, 0);
+    URL.revokeObjectURL(url);
+    const link = document.createElement("a");
+
+    link.download = "meme.png";
+    link.href = destinationCanvas.toDataURL("image/[png;base64");
+    link.dispatchEvent(new MouseEvent("click"));
+  };
+
+  img.src = url;
+}
