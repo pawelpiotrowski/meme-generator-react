@@ -3,6 +3,7 @@ import { RootState } from "../../app/rootReducer";
 import { useCanvasSize } from "../meme-canvas/utils";
 import styles from "./MemeSvg.module.css";
 import { antonFont } from "./antonFontBase64";
+import MemeSvgText from "./MemeSvgText";
 
 export const SVG_ID = "meme-svg";
 export const SVG_PARENT_ID = "meme-svg-parent";
@@ -16,6 +17,7 @@ export default function MemeSvg() {
   return (
     <div id={SVG_PARENT_ID} className={styles["meme-svg__wrapper"]}>
       <svg
+        data-testid={SVG_ID}
         id={SVG_ID}
         height="100%"
         width="100%"
@@ -24,19 +26,18 @@ export default function MemeSvg() {
       >
         <defs>
           <defs>
-            <style>{`@font-face {font-family: Anton; src: url(${antonFont});} .anton {font-family: "Courier";}`}</style>
+            <style>{`@font-face {font-family: Anton; src: url(${antonFont});}`}</style>
           </defs>
         </defs>
         {textBoxes.map((box, index) => (
-          <text
+          <MemeSvgText
             key={index}
-            x="20"
+            x={20}
             y={60 * (index + 1)}
             fontFamily="Anton"
             fontSize={width / 16}
-          >
-            {box}
-          </text>
+            text={box}
+          />
         ))}
       </svg>
     </div>

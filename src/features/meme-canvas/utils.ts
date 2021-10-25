@@ -55,7 +55,10 @@ export function useCanvasSize() {
   // https://gist.github.com/gaearon/e7d97cdf38a2907924ea12e4ebdf3c85
   if (typeof window !== "undefined") {
     useLayoutEffect(() => {
-      const canvas = document.getElementById(CANVAS_PARENT_ID);
+      const canvas = document.getElementById(CANVAS_PARENT_ID) || {
+        offsetHeight: 0,
+        offsetWidth: 0,
+      };
 
       function updateSize() {
         const { offsetHeight: height, offsetWidth: width } = canvas;
