@@ -14,6 +14,10 @@ export default function MemeSvg() {
     (state: RootState) => state.dashboard
   );
 
+  if (width === 0) {
+    return null;
+  }
+
   return (
     <div id={SVG_PARENT_ID} className={styles.memeSvgWrapper}>
       <svg
@@ -32,7 +36,7 @@ export default function MemeSvg() {
         {textBoxes.map((box, index) => (
           <MemeSvgText
             key={index}
-            x={20}
+            x={width / 2}
             y={60 * (index + 1)}
             fontFamily="Anton"
             fontSize={width / 16}

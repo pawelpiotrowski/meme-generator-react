@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useCanvasSize } from "../meme-canvas/utils";
+import styles from "./MemeSvg.module.css";
 
 type MemeSvgTextProps = {
   x: number;
@@ -13,6 +14,7 @@ export const dataTestId = "meme-svg-text";
 
 export default function MemeSvgText(props: MemeSvgTextProps) {
   const canvasSize = useCanvasSize();
+
   const [position, setPosition] = useState({
     x: props.x,
     y: props.y,
@@ -23,11 +25,69 @@ export default function MemeSvgText(props: MemeSvgTextProps) {
     },
   });
 
+  const [rotation, setRotation] = useState({
+    deg: 0,
+    active: false,
+    angle: 0,
+    startAngle: 0,
+    center: {
+      x: 0,
+      y: 0,
+    },
+    r2d: 180 / Math.PI,
+  });
+
+  function handlePointerDownRotation(e: any) {
+    const el = e.target as SVGTSpanElement;
+    const parent = el.parentNode as SVGTextElement;
+    const { width, height, top, left } = parent.getBoundingClientRect();
+    const center = {
+      x: left + width / 2,
+      y: top + height / 2,
+    };
+    const x = e.clientX - center.x;
+    const y = e.clientY - center.y;
+    const startAngle = rotation.r2d * Math.atan2(y, x);
+
+    el.setPointerCapture(e.pointerId);
+
+    setRotation({
+      ...rotation,
+      active: true,
+      center,
+      startAngle,
+    });
+  }
+
+  function handlePointerMoveRotation(e: any) {
+    if (!rotation.active) {
+      return;
+    }
+    const x = e.clientX - rotation.center.x;
+    const y = e.clientY - rotation.center.y;
+    const d = rotation.r2d * Math.atan2(y, x);
+    const deg = d - rotation.startAngle;
+
+    setRotation({
+      ...rotation,
+      deg,
+    });
+  }
+
   function handlePointerDown(e: any) {
+    e.preventDefault();
+
     const el = e.target as SVGTextElement;
+    const isRotator = el.hasAttribute("data-rotator");
+
+    if (isRotator) {
+      handlePointerDownRotation(e);
+      return;
+    }
     const bbox = el.getBoundingClientRect();
     const x = e.clientX - bbox.left;
     const y = e.clientY - bbox.top;
+
     el.setPointerCapture(e.pointerId);
     setPosition({
       ...position,
@@ -40,9 +100,20 @@ export default function MemeSvgText(props: MemeSvgTextProps) {
   }
 
   function handlePointerMove(e: any) {
-    const bbox = (e.target as SVGTextElement).getBoundingClientRect();
+    e.preventDefault();
+
+    const el = e.target as SVGTextElement;
+    const isRotator = el.hasAttribute("data-rotator");
+
+    if (isRotator) {
+      handlePointerMoveRotation(e);
+      return;
+    }
+
+    const bbox = el.getBoundingClientRect();
     const x = e.clientX - bbox.left;
     const y = e.clientY - bbox.top;
+
     if (position.active) {
       setPosition({
         ...position,
@@ -53,9 +124,18 @@ export default function MemeSvgText(props: MemeSvgTextProps) {
   }
 
   function handlePointerUp(e: any) {
+    e.preventDefault();
+
+    const active = false;
+
+    setRotation({
+      ...rotation,
+      active,
+    });
+
     setPosition({
       ...position,
-      active: false,
+      active,
     });
   }
 
@@ -84,8 +164,15 @@ export default function MemeSvgText(props: MemeSvgTextProps) {
       onPointerDown={handlePointerDown}
       onPointerUp={handlePointerUp}
       onPointerMove={handlePointerMove}
+      className={styles.memeSvgText}
+      textAnchor="middle"
+      dominantBaseline="central"
+      transform={`rotate(${rotation.deg}, ${position.x}, ${position.y})`}
     >
       {props.text}
+      <tspan fontSize={props.fontSize / 4} data-rotator dx={10} dy={20}>
+        🔄
+      </tspan>
     </text>
   );
 }
