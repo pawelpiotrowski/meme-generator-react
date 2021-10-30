@@ -11,6 +11,9 @@
 .formContainerInput {
   margin: 0;
   padding: 0 16px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
 .formContainerInput input,
@@ -36,4 +39,37 @@
 
 .formContainerInput input:focus {
   border: 1px solid var(--app-color-shout);
+}
+
+.formContainerInput button {
+  border: 1px solid var(--app-color-middle-shade-2);
+  cursor: pointer;
+  font-family: "Anton";
+  height: 100%;
+  margin-left: 16px;
+  outline: none;
+  width: 32px;
+}
+
+.buttonClear {
+  background-color: var(--app-color-middle-shade-1);
+}
+
+.buttonClear svg {
+  width: 100%;
+  height: 100%;
+}
+
+.buttonClear svg path {
+  fill: var(--app-color-lead);
+}
+
+.buttonTextBlack {
+  background-color: white;
+  color: black;
+}
+
+.buttonTextWhite {
+  background-color: black;
+  color: white;
 }
