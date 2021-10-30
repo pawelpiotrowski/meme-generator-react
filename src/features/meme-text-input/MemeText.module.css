@@ -51,6 +51,10 @@
   width: 32px;
 }
 
+.formContainerInput .buttonSelected {
+  border: 1px solid var(--app-color-shout);
+}
+
 .buttonClear {
   background-color: var(--app-color-middle-shade-1);
 }

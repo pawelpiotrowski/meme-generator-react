@@ -2,19 +2,25 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { MemeImage } from "../meme-images-list/interface";
 
 type MemeImageSelected = MemeImage | null;
+export type TextBoxColor = "white" | "black";
+
 export type TextBox = {
   text: string;
+  color: TextBoxColor;
+  isReset: boolean;
 };
+
 export type TextBoxAction = {
   index: number;
   box: TextBox;
 };
+
 export type TextBoxes = [TextBox, TextBox, TextBox, TextBox];
 
 const textBoxesArray = Array(4);
 
 const initialState = {
-  textBoxes: textBoxesArray.fill({ text: "" }) as TextBoxes,
+  textBoxes: textBoxesArray.fill({ text: "", color: "black" }) as TextBoxes,
   image: null as MemeImageSelected,
 };
 
