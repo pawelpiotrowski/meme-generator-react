@@ -6,6 +6,7 @@ import MemeTextInput, { dataTestId } from "./MemeTextInput";
 
 describe("<MemeTextInput />", () => {
   let store: EnhancedStore;
+  const mockTextBox = { text: "Test" };
 
   beforeAll(() => {
     store = makeStore();
@@ -15,7 +16,7 @@ describe("<MemeTextInput />", () => {
     beforeEach(() => {
       render(
         <Provider store={store}>
-          <MemeTextInput text="test" index={0} />
+          <MemeTextInput box={mockTextBox} index={0} />
         </Provider>
       );
     });
@@ -29,7 +30,7 @@ describe("<MemeTextInput />", () => {
     beforeEach(() => {
       render(
         <Provider store={store}>
-          <MemeTextInput text="test" index={0} />
+          <MemeTextInput box={mockTextBox} index={0} />
         </Provider>
       );
     });
@@ -41,7 +42,7 @@ describe("<MemeTextInput />", () => {
 
       const { dashboard } = store.getState();
 
-      expect(dashboard.textBoxes[0]).toEqual("23");
+      expect(dashboard.textBoxes[0]).toEqual({ text: "23" });
     });
   });
 });

@@ -16,7 +16,7 @@ describe("<MemeSvg />", () => {
             y={0}
             fontFamily="Anton"
             fontSize={30}
-            text="Test"
+            box={{ text: "Test" }}
           />
         </svg>
       </Provider>

@@ -3,6 +3,10 @@ import { Provider } from "react-redux";
 import { makeStore } from "../../app/store";
 import MemeSvg, { SVG_ID } from "./MemeSvg";
 
+jest.mock("../meme-canvas/utils", () => ({
+  useCanvasSize: jest.fn().mockReturnValue({ width: 500, height: 500 }),
+}));
+
 describe("<MemeSvg />", () => {
   let store;
   beforeEach(() => {

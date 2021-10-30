@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { TextBox } from "../dashboard/dashboardSlice";
 import { useCanvasSize } from "../meme-canvas/utils";
 import styles from "./MemeSvg.module.css";
 
@@ -7,7 +8,7 @@ type MemeSvgTextProps = {
   y: number;
   fontFamily: string;
   fontSize: number;
-  text: string;
+  box: TextBox;
 };
 
 export const dataTestId = "meme-svg-text";
@@ -169,7 +170,7 @@ export default function MemeSvgText(props: MemeSvgTextProps) {
       dominantBaseline="central"
       transform={`rotate(${rotation.deg}, ${position.x}, ${position.y})`}
     >
-      {props.text}
+      {props.box.text}
       <tspan
         fontSize={props.fontSize / 2}
         data-rotator

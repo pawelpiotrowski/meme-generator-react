@@ -1,15 +1,17 @@
-import { setTextBox } from "../dashboard/dashboardSlice";
+import { setTextBox, TextBoxAction } from "../dashboard/dashboardSlice";
 import { ChangeEvent } from "react";
 import { useDispatch } from "react-redux";
 import styles from "./MemeText.module.css";
 
 export const dataTestId = "meme-text-input";
 
-export default function MemeTextInput(props: { text: string; index: number }) {
+export default function MemeTextInput(props: TextBoxAction) {
   const dispatch = useDispatch();
 
   function handleChange(event: ChangeEvent<HTMLInputElement>): void {
-    dispatch(setTextBox({ text: event.target.value, index: props.index }));
+    dispatch(
+      setTextBox({ box: { text: event.target.value }, index: props.index })
+    );
   }
 
   return (

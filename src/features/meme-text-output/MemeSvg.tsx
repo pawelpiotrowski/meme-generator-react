@@ -38,7 +38,7 @@ export default function MemeSvg() {
             y={60 * (index + 1)}
             fontFamily="Anton"
             fontSize={width / 18}
-            text={box}
+            box={box}
           />
         ))}
       </svg>

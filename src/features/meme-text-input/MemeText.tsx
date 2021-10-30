@@ -23,8 +23,8 @@ export default function MemeText() {
       onSubmit={handleSubmit}
       className={styles.formContainer}
     >
-      {textBoxes.map((text, index) => (
-        <MemeTextInput key={index} text={text} index={index} />
+      {textBoxes.map((box, index) => (
+        <MemeTextInput key={index} box={box} index={index} />
       ))}
     </form>
   );

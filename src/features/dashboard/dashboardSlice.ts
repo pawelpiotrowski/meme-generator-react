@@ -2,10 +2,19 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { MemeImage } from "../meme-images-list/interface";
 
 type MemeImageSelected = MemeImage | null;
-export type TextBoxes = [string, string, string, string];
+export type TextBox = {
+  text: string;
+};
+export type TextBoxAction = {
+  index: number;
+  box: TextBox;
+};
+export type TextBoxes = [TextBox, TextBox, TextBox, TextBox];
+
+const textBoxesArray = Array(4);
 
 const initialState = {
-  textBoxes: ["", "", "", ""] as TextBoxes,
+  textBoxes: textBoxesArray.fill({ text: "" }) as TextBoxes,
   image: null as MemeImageSelected,
 };
 
@@ -19,11 +28,11 @@ const dashboardSlice = createSlice({
         image: action.payload,
       };
     },
-    setTextBox(state, action: PayloadAction<{ text: string; index: number }>) {
-      const { index, text } = action.payload;
+    setTextBox(state, action: PayloadAction<TextBoxAction>) {
+      const { index, box } = action.payload;
 
-      state.textBoxes = state.textBoxes.map((t, i) =>
-        i === index ? text : t
+      state.textBoxes = state.textBoxes.map((b, i) =>
+        i === index ? box : b
       ) as TextBoxes;
       return state;
     },
