@@ -1,4 +1,5 @@
 .formContainer {
+  background-color: var(--app-color-middle);
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -8,13 +9,14 @@
 }
 
 .formContainerInput {
+  margin: 0;
   padding: 0 16px;
 }
 
 .formContainerInput input,
 .formContainerInput label {
   display: inline-block;
-  vertical-align: text-bottom;
+  vertical-align: middle;
 }
 
 .formContainerInput label {
@@ -22,12 +24,16 @@
 }
 
 .formContainerInput input {
-  background-color: transparent;
+  background-color: var(--app-color-middle-shade-1);
+  color: var(--app-color-lead);
   outline: none;
-  border: none;
-  border-bottom: 1px solid var(--app-color-4);
+  border: 1px solid var(--app-color-middle-shade-2);
   width: calc(96% - 2.6em);
-  color: var(--app-color-5);
   font-size: 1em;
   line-height: 1;
+  padding: 6px;
+}
+
+.formContainerInput input:focus {
+  border: 1px solid var(--app-color-shout);
 }

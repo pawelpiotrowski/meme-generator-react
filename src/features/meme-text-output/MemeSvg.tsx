@@ -29,9 +29,7 @@ export default function MemeSvg() {
         viewBox={`0 0 ${width} ${height}`}
       >
         <defs>
-          <defs>
-            <style>{`@font-face {font-family: Anton; src: url(${antonFont});}`}</style>
-          </defs>
+          <style>{`@font-face {font-family: Anton; src: url(${antonFont});}`}</style>
         </defs>
         {textBoxes.map((box, index) => (
           <MemeSvgText
@@ -39,7 +37,7 @@ export default function MemeSvg() {
             x={width / 2}
             y={60 * (index + 1)}
             fontFamily="Anton"
-            fontSize={width / 16}
+            fontSize={width / 18}
             text={box}
           />
         ))}

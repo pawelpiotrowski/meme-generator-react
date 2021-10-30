@@ -15,6 +15,7 @@ import { RootState } from "../../app/rootReducer";
 import { attempt, get, isNil } from "lodash";
 import { CANVAS_EXPORT_ID, CANVAS_ID, CANVAS_PARENT_ID } from "./constants";
 import { SVG_PARENT_ID } from "../meme-text-output/MemeSvg";
+import MemeCanvasExportButton from "./MemeCanvasExportButton";
 
 export default function MemeCanvas() {
   const { image: selectedImage } = useSelector(
@@ -116,9 +117,10 @@ export default function MemeCanvas() {
     <div id={CANVAS_PARENT_ID} className={styles.canvasContainer}>
       <canvas data-testid={CANVAS_ID} id={CANVAS_ID}></canvas>
       <canvas className={styles.exportCanvas} id={CANVAS_EXPORT_ID}></canvas>
-      <button className={styles.exportCanvasButton} onClick={exportCanvas}>
-        DOWNLOAD
-      </button>
+      <MemeCanvasExportButton
+        disabled={isNil(selectedImage)}
+        onClick={exportCanvas}
+      />
     </div>
   );
 }

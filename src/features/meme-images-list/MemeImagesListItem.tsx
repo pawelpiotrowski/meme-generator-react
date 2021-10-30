@@ -33,7 +33,7 @@ export default function MemeImagesListItem(props: MemeImagesListItemProps) {
         src={props.image.url}
         alt={props.image.name}
         layout="fill"
-        objectFit="contain"
+        objectFit="cover"
       />
     </div>
   );

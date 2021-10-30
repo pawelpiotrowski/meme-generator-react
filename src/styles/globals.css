@@ -1,26 +1,34 @@
 html {
-  --app-color-1: #fcfff5;
-  --app-color-2: #d1dbbd;
-  --app-color-3: #91aa9d;
-  --app-color-4: #3e606f;
-  --app-color-5: #193441;
+  --app-color-lead: #efefef;
+  --app-color-lead-shade-1: #bdd4de;
+  --app-color-middle-tint-1: #3f5765;
+  --app-color-middle: #2b3a42;
+  --app-color-middle-shade-1: #26343d;
+  --app-color-middle-shade-2: #1f2c33;
+  --app-color-rear-tint-1: #221e1f;
+  --app-color-rear: #18181a;
+  --app-color-shout: #ff530d;
 }
 
 @media (prefers-color-scheme: dark) {
   html {
-    --app-color-5: #fcfff5;
-    --app-color-4: #d1dbbd;
-    --app-color-3: #91aa9d;
-    --app-color-2: #3e606f;
-    --app-color-1: #193441;
+    --app-color-lead: #efefef;
+    --app-color-lead-shade-1: #bdd4de;
+    --app-color-middle-tint-1: #3f5765;
+    --app-color-middle: #2b3a42;
+    --app-color-middle-shade-1: #26343d;
+    --app-color-middle-shade-2: #1f2c33;
+    --app-color-rear-tint-1: #221e1f;
+    --app-color-rear: #18181a;
+    --app-color-shout: #ff530d;
   }
 }
 
 html,
 body,
 #__next {
-  background-color: var(--app-color-1);
-  color: var(--app-color-5);
+  background-color: var(--app-color-rear);
+  color: var(--app-color-lead);
   padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
@@ -37,4 +45,13 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+@font-face {
+  font-family: "Anton";
+  src: url("/fonts/Anton-Regular.woff2") format("woff2");
+}
+
+.anton {
+  font-family: "Anton";
 }

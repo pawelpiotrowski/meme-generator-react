@@ -2,6 +2,7 @@
   cursor: pointer;
   height: 200px;
   position: relative;
+  border: 1px solid transparent;
 }
 
 .item img {
@@ -9,12 +10,13 @@
 }
 
 .item:hover {
-  background-color: var(--app-color-2);
+  border: 1px solid var(--app-color-shout);
 }
 
 .itemSelected,
 .itemSelected:hover {
-  background-color: var(--app-color-4);
+  background-color: var(--app-color-shout);
+  border: 1px solid var(--app-color-shout);
 }
 
 .itemSelected:hover {

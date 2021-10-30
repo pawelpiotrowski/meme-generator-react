@@ -6,11 +6,13 @@
   flex-direction: column;
 }
 
+.dashboardToolbar {
+  height: 48px;
+}
+
 .dashboardCanvasContainer {
   width: 100%;
-  height: calc(64% - 4px);
-  background-color: var(--app-color-2);
-  border-bottom: 4px solid var(--app-color-4);
+  height: calc(64% - 48px);
   position: relative;
 }
 

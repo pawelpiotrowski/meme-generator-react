@@ -170,8 +170,14 @@ export default function MemeSvgText(props: MemeSvgTextProps) {
       transform={`rotate(${rotation.deg}, ${position.x}, ${position.y})`}
     >
       {props.text}
-      <tspan fontSize={props.fontSize / 4} data-rotator dx={10} dy={20}>
-        🔄
+      <tspan
+        fontSize={props.fontSize / 2}
+        data-rotator
+        dy={props.fontSize / 3}
+        opacity={position.active || rotation.active ? 1 : 0}
+      >
+        {" "}
+        ↺
       </tspan>
     </text>
   );

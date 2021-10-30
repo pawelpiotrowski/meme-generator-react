@@ -7,3 +7,12 @@
 .memeSvgText {
   cursor: move;
 }
+
+.memeSvgText tspan {
+  cursor: default;
+  opacity: 0;
+}
+
+.memeSvgText:hover tspan {
+  opacity: 1;
+}

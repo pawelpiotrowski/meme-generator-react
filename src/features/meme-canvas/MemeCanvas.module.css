@@ -1,15 +1,93 @@
 .canvasContainer {
-  border: 2px solid var(--app-color-5);
   height: calc(100% - 1px);
   width: calc(100% - 1px);
   overflow: hidden;
 }
 
-.exportCanvasButton {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
+.canvasToolbar {
+  background-color: var(--app-color-middle);
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.canvasToolbarTitle,
+.canvasToolbarButtons {
+  flex: 1;
+}
+
+.canvasToolbarTitle {
+  margin: 0;
+  padding: 0 0 0 16px;
+  font-size: 1.2em;
+  font-weight: 400;
+}
+
+.canvasToolbarButtons {
+  margin: 0;
+  padding: 0 16px 0 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  list-style-type: none;
+}
+
+.canvasToolbarButtons li {
+  cursor: pointer;
+  background-color: var(--app-color-middle-shade-1);
+  border: 1px solid var(--app-color-middle-shade-2);
+  width: 28px;
+  height: 28px;
+  text-align: center;
+  margin: 0 8px;
+  position: relative;
+}
+
+.canvasToolbarButtons li i {
   display: block;
+  position: absolute;
+  width: 72%;
+  height: 72%;
+  top: 14%;
+  left: 14%;
+}
+
+.liBlack i {
+  background-color: black;
+}
+
+.liTransparent i {
+  background-color: transparent;
+}
+
+.liWhite i {
+  background-color: white;
+}
+
+.exportCanvasButton {
+  cursor: pointer;
+  position: absolute;
+  bottom: 16px;
+  right: 16px;
+  display: block;
+  width: 36px;
+  height: 36px;
+  background-color: var(--app-color-shout);
+  border: 1px solid var(--app-color-middle-shade-2);
+  opacity: 1;
+}
+
+.exportCanvasButton svg path {
+  fill: var(--app-color-lead);
+}
+
+.exportCanvasButton:disabled {
+  background-color: var(--app-color-middle-shade-1);
+  cursor: not-allowed;
+  opacity: 0.9;
 }
 
 .exportCanvas {
