@@ -1,16 +1,17 @@
 import { render, screen } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { makeStore } from "../../app/store";
-import Dashboard, { dataTestId } from "./Dashboard";
+import MemeCanvasToolbar, { dataTestId } from "./MemeCanvasToolbar";
 
-describe("<Dashboard />", () => {
+describe("<MemeCanvasToolbar />", () => {
   let store;
+
   beforeEach(() => {
     store = makeStore();
 
     render(
       <Provider store={store}>
-        <Dashboard />
+        <MemeCanvasToolbar />
       </Provider>
     );
   });

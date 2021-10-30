@@ -1,11 +1,14 @@
 import styles from "./MemeCanvas.module.css";
 
+export const dataTestId = "meme-canvas-export-button";
+
 export default function MemeCanvasExportButton(props: {
   disabled: boolean;
   onClick: () => void;
 }) {
   return (
     <button
+      data-testid={dataTestId}
       className={styles.exportCanvasButton}
       onClick={props.onClick}
       disabled={props.disabled}

@@ -4,9 +4,11 @@ import MemeText from "../meme-text-input/MemeText";
 import MemeSvg from "../meme-text-output/MemeSvg";
 import MemeCanvasToolbar from "../meme-canvas/MemeCanvasToolbar";
 
+export const dataTestId = "dashboard";
+
 export default function Dashboard() {
   return (
-    <div data-testid="dashboard" className={styles.dashboard}>
+    <div data-testid={dataTestId} className={styles.dashboard}>
       <div className={styles.dashboardToolbar}>
         <MemeCanvasToolbar />
       </div>
