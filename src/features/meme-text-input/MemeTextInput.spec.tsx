@@ -10,7 +10,6 @@ describe("<MemeTextInput />", () => {
   const mockTextBox = {
     text: "Test",
     color: "black",
-    isReset: false,
   } as TextBox;
 
   beforeAll(() => {
@@ -46,9 +45,9 @@ describe("<MemeTextInput />", () => {
       });
 
       const { dashboard } = store.getState();
-      const { color, isReset } = mockTextBox;
+      const { color } = mockTextBox;
 
-      expect(dashboard.textBoxes[0]).toEqual({ text: "23", color, isReset });
+      expect(dashboard.textBoxes[0]).toEqual({ text: "23", color });
     });
   });
 });

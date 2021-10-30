@@ -8,10 +8,7 @@ import styles from "./MemeText.module.css";
 export const dataTestId = "meme-text-form";
 
 export default function MemeText() {
-  const { image: selectedImage, textBoxes } = useSelector(
-    (state: RootState) => state.dashboard
-  );
-  // const boxCount = get(selectedImage, "box_count", textBoxes.length);
+  const { textBoxes } = useSelector((state: RootState) => state.dashboard);
 
   function handleSubmit(event: FormEvent): void {
     event.preventDefault();

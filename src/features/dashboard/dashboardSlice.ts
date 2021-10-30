@@ -7,7 +7,6 @@ export type TextBoxColor = "white" | "black";
 export type TextBox = {
   text: string;
   color: TextBoxColor;
-  isReset: boolean;
 };
 
 export type TextBoxAction = {
@@ -20,8 +19,12 @@ export type TextBoxes = [TextBox, TextBox, TextBox, TextBox];
 const textBoxesArray = Array(4);
 
 const initialState = {
-  textBoxes: textBoxesArray.fill({ text: "", color: "black" }) as TextBoxes,
+  textBoxes: textBoxesArray.fill({
+    text: "",
+    color: "black",
+  }) as TextBoxes,
   image: null as MemeImageSelected,
+  resetBoxIndex: -1,
 };
 
 const dashboardSlice = createSlice({
@@ -42,9 +45,21 @@ const dashboardSlice = createSlice({
       ) as TextBoxes;
       return state;
     },
+    resetTextBox(state, action: PayloadAction<number>) {
+      state.resetBoxIndex = action.payload;
+      if (action.payload > -1) {
+        state.textBoxes[action.payload].text = "";
+      }
+
+      return state;
+    },
   },
 });
 
-export const { setImage: selectMemeImage, setTextBox } = dashboardSlice.actions;
+export const {
+  setImage: selectMemeImage,
+  setTextBox,
+  resetTextBox,
+} = dashboardSlice.actions;
 
 export default dashboardSlice.reducer;

@@ -16,7 +16,8 @@ describe("<MemeSvg />", () => {
             y={0}
             fontFamily="Anton"
             fontSize={30}
-            box={{ text: "Test", color: "white", isReset: false }}
+            box={{ text: "Test", color: "white" }}
+            index={0}
           />
         </svg>
       </Provider>

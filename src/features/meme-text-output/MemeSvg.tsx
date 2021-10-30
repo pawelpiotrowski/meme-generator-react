@@ -10,9 +10,7 @@ export const SVG_PARENT_ID = "meme-svg-parent";
 
 export default function MemeSvg() {
   const { height, width } = useCanvasSize();
-  const { image, textBoxes } = useSelector(
-    (state: RootState) => state.dashboard
-  );
+  const { textBoxes } = useSelector((state: RootState) => state.dashboard);
 
   if (width === 0) {
     return null;
@@ -39,6 +37,7 @@ export default function MemeSvg() {
             fontFamily="Anton"
             fontSize={width / 18}
             box={box}
+            index={index}
           />
         ))}
       </svg>

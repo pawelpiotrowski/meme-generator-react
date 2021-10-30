@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
-import { TextBox } from "../dashboard/dashboardSlice";
-import { useCanvasSize } from "../meme-canvas/utils";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../app/rootReducer";
+import { resetTextBox, TextBox } from "../dashboard/dashboardSlice";
 import styles from "./MemeSvg.module.css";
 
 type MemeSvgTextProps = {
@@ -9,14 +10,16 @@ type MemeSvgTextProps = {
   fontFamily: string;
   fontSize: number;
   box: TextBox;
+  index: number;
 };
 
 export const dataTestId = "meme-svg-text";
 
 export default function MemeSvgText(props: MemeSvgTextProps) {
-  const canvasSize = useCanvasSize();
+  const dispatch = useDispatch();
+  const { resetBoxIndex } = useSelector((state: RootState) => state.dashboard);
 
-  const [position, setPosition] = useState({
+  const defaultPositionState = {
     x: props.x,
     y: props.y,
     active: false,
@@ -24,9 +27,8 @@ export default function MemeSvgText(props: MemeSvgTextProps) {
       x: 0,
       y: 0,
     },
-  });
-
-  const [rotation, setRotation] = useState({
+  };
+  const defaultRotationState = {
     deg: 0,
     active: false,
     angle: 0,
@@ -36,7 +38,9 @@ export default function MemeSvgText(props: MemeSvgTextProps) {
       y: 0,
     },
     r2d: 180 / Math.PI,
-  });
+  };
+  const [position, setPosition] = useState(defaultPositionState);
+  const [rotation, setRotation] = useState(defaultRotationState);
 
   function handlePointerDownRotation(e: any) {
     const el = e.target as SVGTSpanElement;
@@ -140,20 +144,16 @@ export default function MemeSvgText(props: MemeSvgTextProps) {
     });
   }
 
-  //   function onResize() {
-  //     setPosition({
-  //       x: props.x,
-  //       y: props.y,
-  //       active: false,
-  //       offset: {
-  //         x: 0,
-  //         y: 0,
-  //       },
-  //     });
-  //   }
+  function onReset() {
+    if (resetBoxIndex !== props.index) {
+      return;
+    }
+    setRotation(defaultRotationState);
+    setPosition(defaultPositionState);
+    dispatch(resetTextBox(-1));
+  }
 
-  // will update canvasSize
-  // useEffect(onResize, [canvasSize]);
+  useEffect(onReset, [resetBoxIndex]);
 
   return (
     <text
