@@ -54,7 +54,10 @@ export default function MemeTextInput(props: TextBoxAction) {
         Aa
       </button>
       <button
-        className={styles.buttonTextWhite}
+        className={
+          styles.buttonTextWhite +
+          (props.box.color === "white" ? ` ${styles.buttonSelected}` : "")
+        }
         onClick={() => {
           handleColorChange("white");
         }}
