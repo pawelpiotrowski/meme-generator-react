@@ -21,8 +21,8 @@ export default function MemeSvg() {
       <svg
         data-testid={SVG_ID}
         id={SVG_ID}
-        height="100%"
-        width="100%"
+        height={`${height}px`}
+        width={`${width}px`}
         xmlns="http://www.w3.org/2000/svg"
         viewBox={`0 0 ${width} ${height}`}
       >

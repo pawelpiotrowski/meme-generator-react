@@ -55,3 +55,9 @@ a {
 .anton {
   font-family: "Anton";
 }
+
+body .popup-content {
+  background: transparent;
+  border: none;
+  transform: translateY(-16vh);
+}
